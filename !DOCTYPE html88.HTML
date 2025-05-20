@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Signature Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background-color: #ffffff; } /* تغيير الخلفية إلى بيضاء */
+    label { display: inline-block; width: 100px; font-weight: bold; margin-right: 10px; } /* جعل جميع العناوين بنفس العرض */
+    input { width: 300px; padding: 5px; }
+    button { margin-top: 15px; padding: 10px 20px; background-color: red; color: white; border: none; cursor: pointer; }
+    #signaturePreview {
+      margin-top: 30px;
+      background: #ffffff; /* تحديد الخلفية البيضاء للتوقيع */
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    .social-icons {
+      display: inline-block; 
+      gap: 10px;
+    }
+    .social-icons a {
+      display: inline-block;
+    }
+    .social-icons img { width: 24px; height: 24px; }
+
+    /* لضبط محاذاة كل الحقول مع بعضها */
+    .form-row {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center; /* محاذاة النصوص والحقول */
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Email Signature Generator</h2>
+
+  <form onsubmit="generateSignature(); return false;">
+    <div class="form-row">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+    </div>
+
+    <div class="form-row">
+      <label for="job">Job Title:</label>
+      <input type="text" id="job" required>
+    </div>
+
+    <div class="form-row">
+      <label for="phone">Mobile:</label>
+      <input type="text" id="phone">
+    </div>
+
+    <div class="form-row">
+      <label for="mobile">Branch phone:</label>
+      <input type="text" id="mobile">
+    </div>
+
+    <div class="form-row">
+      <label for="email">Email:</label>
+      <input type="email" id="email">
+    </div>
+
+    <div class="form-row">
+      <label for="website">Website:</label>
+      <input type="text" id="website" value="www.almutasaweq.com">
+    </div>
+
+    <div class="form-row">
+      <label for="address">Address</label>
+      <input type="text" id="address" value="Iraq - Baghdad">
+    </div>
+
+    <div class="form-row">
+      <label for="socialMedia">Social Media:</label>
+      <div class="social-icons">
+        <a href="https://web.facebook.com/ALMUTASAWEQCO" target="_blank"><img src="facebook-icon-black.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/almutasaweq/" target="_blank"><img src="instagram-icon-black.png" alt="Instagram"></a>
+        <a href="https://www.linkedin.com/" target="_blank"><img src="linkedin-icon-black.png" alt="LinkedIn"></a>
+        <a href="https://twitter.com/" target="_blank"><img src="twitter-icon-black.png" alt="Twitter"></a>
+      </div>
+    </div>
+
+    <button type="submit">Create Signature</button>
+  </form>
+
+  <div id="signaturePreview"></div>
+  
+  <button id="copyButton" onclick="copySignature()">Copy Signature</button>
+
+  <script>
+    function generateSignature() {
+      const name = document.getElementById("name").value;
+      const job = document.getElementById("job").value;
+      const phone = document.getElementById("phone").value;
+      const mobile = document.getElementById("mobile").value;
+      const email = document.getElementById("email").value;
+      const website = document.getElementById("website").value;
+      const address = document.getElementById("address").value;
+
+      const signature = `
+<table style="font-family: Arial, sans-serif; font-size: 14px; color: #000; border-collapse: collapse;">
+  <tr>
+    <td style="vertical-align: top; padding: 4px; width: 100px;">
+      <img src="MTSQ 2.png" alt="Company Logo" style="width: 80px; height: auto;">
+    </td>
+    <td>
+      <table style="font-family: Arial, sans-serif; font-size: 14px; color: #000; border-collapse: collapse;">
+        <tr><td style="font-weight: bold; padding: 4px;">Name:</td><td style="border-left: 2px solid black; padding: 4px 10px;">${name}</td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Job Title:</td><td style="border-left: 2px solid black; padding: 4px 10px;">${job}</td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Mobile:</td><td style="border-left: 2px solid black; padding: 4px 10px;">${phone}</td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Branch phone:</td><td style="border-left: 2px solid black; padding: 4px 10px;">${mobile}</td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Email:</td><td style="border-left: 2px solid black; padding: 4px 10px;"><a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a></td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Web:</td><td style="border-left: 2px solid black; padding: 4px 10px;"><a href="http://${website}" style="color: #000; text-decoration: none;">${website}</a></td></tr>
+        <tr><td style="font-weight: bold; padding: 4px;">Address:</td><td style="border-left: 2px solid black; padding: 4px 10px;">${address}</td></tr>
+        <!-- إضافة الفقرة الخاصة بالتواصل الاجتماعي هنا بعد العنوان -->
+        <tr><td style="font-weight: bold; padding: 4px;">Social Media:</td>
+          <td style="border-left: 2px solid black; padding: 4px 10px;">
+            <a href="https://web.facebook.com/ALMUTASAWEQCO" target="_blank"><img src="facebook-icon-black.png" alt="Facebook" style="width: 24px; height: 24px; margin-right: 5px;"></a>
+            <a href="https://www.instagram.com/almutasaweq/" target="_blank"><img src="instagram-icon-black.png" alt="Instagram" style="width: 24px; height: 24px; margin-right: 5px;"></a>
+            <a href="https://www.linkedin.com/" target="_blank"><img src="linkedin-icon-black.png" alt="LinkedIn" style="width: 24px; height: 24px; margin-right: 5px;"></a>
+            <a href="https://twitter.com/" target="_blank"><img src="twitter-icon-black.png" alt="Twitter" style="width: 24px; height: 24px; margin-right: 5px;"></a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+      `;
+
+      document.getElementById("signaturePreview").innerHTML = signature;
+    }
+
+    function copySignature() {
+      const signatureContent = document.getElementById("signaturePreview").innerHTML;
+
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = signatureContent;
+      document.body.appendChild(tempDiv);
+
+      const range = document.createRange();
+      range.selectNode(tempDiv);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+
+      document.execCommand("copy");
+      document.body.removeChild(tempDiv);
+
+      alert("Signature copied to clipboard!");
+    }
+  </script>
+
+</body>
+</html>
